@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from ticket_notes.views import homepage_view, notes_view
+from ticket_notes.views import homepage_view, bookmark_event
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage_view, name='index'),
-    path('notes/', notes_view, name='notes'),
+    path('bookmark_event/',bookmark_event, name='bookmark_event'),
 
 ]
 
