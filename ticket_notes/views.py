@@ -1,5 +1,8 @@
 from django.shortcuts import render
 import requests
+from django.http import JsonResponse
+from .models import BookmarkedEvent
+from django.views.decorators.http import require_http_methods
 
 def get_preferred_image(images):
     for image in images:
@@ -61,9 +64,6 @@ def homepage_view(request):
 
 
 
-from django.http import JsonResponse
-from .models import BookmarkedEvent
-from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["POST"])
 def bookmark_event(request):
@@ -86,3 +86,24 @@ def bookmark_event(request):
     
     # Return a success response
     return JsonResponse({'status': 'success'})
+
+def bookmarks_view(request):
+    bookmarks = BookmarkedEvent.objects.all()  # Or filter based on user/session
+    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+
+from django.shortcuts import get_object_or_404, redirect
+
+# View to edit/add a note to a bookmark
+def edit_note(request, bookmark_id):
+    if request.method == 'POST':
+        bookmark = get_object_or_404(BookmarkedEvent, id=bookmark_id)
+        bookmark.note = request.POST.get('note', '')
+        bookmark.save()
+        return redirect('bookmarks')
+
+# View to delete a bookmark
+def delete_bookmark(request, bookmark_id):
+    if request.method == 'POST':
+        bookmark = get_object_or_404(BookmarkedEvent, id=bookmark_id)
+        bookmark.delete()
+        return redirect('bookmarks')

@@ -27,6 +27,15 @@
                                 <button type="submit" class="btn p-0 border-0 bg-transparent">
                                     <i class="bi bi-bookmark-star h1"></i>
                                 </button>
+                                {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'success' %}
+                                        <style>
+                                            .bi-bookmark-star { color: green; }
+                                        </style>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                             </form>
                             <!-- End of the form for bookmarking -->
                         </div>
