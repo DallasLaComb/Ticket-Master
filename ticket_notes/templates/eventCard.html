@@ -11,7 +11,9 @@
                         <div class="col-md-4 col-6 my-3">
                             <h1 class="h2">{{ event.event_name }}</h1>
                             <p class="p text-secondary">{{ event.venue }}<br>{{ event.city }}, {{ event.state }}</p>
-                            <a href="#" class="btn btn-primary">Find tickets</a>
+                            <a href="{{ event.url }}" target="_blank" class="btn btn-primary">Find tickets</a>
+                            <i class="bi bi-bookmark-star h1"></i>
+    
                         </div>
                         <div class="col-md-4 col-6 text-end my-3">
                             <h3 class="h3 text-success ">{{ event.local_date }}</h3>

@@ -34,6 +34,7 @@ def homepage_view(request):
                             'local_date': event['dates']['start'].get('localDate', 'N/A'),
                             'local_time': event['dates']['start'].get('localTime', 'N/A'),
                             'image_url': get_preferred_image(event.get('images', [])),
+                            'url': event.get('url', '#'),
                         }
 
                         venue_info = event.get('_embedded', {}).get('venues', [{}])[0]
