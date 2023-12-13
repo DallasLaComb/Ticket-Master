@@ -3,9 +3,7 @@ function normalizePathname(pathname) {
     return pathname.endsWith('/') ? pathname : `${pathname}/`;
 }
 function isCurrentPage(href, windowLocation) {
-    // Construct the full absolute URL from the href
     const fullUrl = new URL(href, windowLocation.origin);
-    // Normalize paths before comparison
     const normalizedHref = normalizePathname(fullUrl.pathname);
     const normalizedWindowLocation = normalizePathname(windowLocation.pathname);
 

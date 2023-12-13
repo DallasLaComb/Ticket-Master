@@ -4,7 +4,6 @@
     <div class="container-fluid bg-primary p-2 text-white">
         <h1 class="text-center">Ticketmaster</h1>
         <h2 class="text-center">Quickly find tickets around you.</h2>
-
         <form action="{% url 'index' %}" method="get" class="container">
             <div class="row justify-content-center">
                 <div class="col-4 mx-0 p-0">
@@ -18,7 +17,6 @@
                 </div>
             </div>
         </form>
-
         <div class="row justify-content-center">
             <div class="col-9 bg-danger mt-2 py-2 rounded shadow d-none" id="displayError"></div>
         </div>
@@ -28,6 +26,5 @@
         {% include "eventCard.html" %}
         {% endfor %}
     </div>
-    
 {% endblock content %}
 

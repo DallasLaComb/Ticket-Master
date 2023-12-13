@@ -3,6 +3,7 @@ import requests
 from django.http import HttpResponseRedirect, JsonResponse
 from .models import BookmarkedEvent
 from django.views.decorators.http import require_http_methods
+from django.shortcuts import get_object_or_404, redirect
 
 def get_preferred_image(images):
     for image in images:
@@ -17,11 +18,9 @@ def homepage_view(request):
         'genre_artist_event': '',
         'city': ''
     }
-
     if 'genreArtistEvent' in request.GET and 'city' in request.GET:
         genre_artist_event = request.GET.get('genreArtistEvent')
         city = request.GET.get('city')
-
         if not genre_artist_event or not city:
             context['error_message'] = 'Search term and city cannot be empty'
         else:
@@ -64,20 +63,11 @@ def homepage_view(request):
 
             context['genre_artist_event'] = genre_artist_event
             context['city'] = city
-
     return render(request, 'index.html', context)
-
-
-
-
-
 
 @require_http_methods(["POST"])
 def bookmark_event(request):
-    # This assumes you're using POST method to send event data
-    # and that you have CSRF token handled for AJAX requests
     event_data = request.POST
-    
     # Create a new BookmarkedEvent instance
     new_bookmark = BookmarkedEvent(
         event_name=event_data.get('event_name'),
@@ -90,17 +80,12 @@ def bookmark_event(request):
         image_url=event_data.get('image_url'),
     )
     new_bookmark.save()
-    
-    # Return a success response
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def bookmarks_view(request):
-    bookmarks = BookmarkedEvent.objects.all()  # Or filter based on user/session
+    bookmarks = BookmarkedEvent.objects.all() 
     return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
 
-from django.shortcuts import get_object_or_404, redirect
-
-# View to edit/add a note to a bookmark
 def edit_note(request, bookmark_id):
     if request.method == 'POST':
         bookmark = get_object_or_404(BookmarkedEvent, id=bookmark_id)
@@ -108,7 +93,6 @@ def edit_note(request, bookmark_id):
         bookmark.save()
         return redirect('bookmarks')
 
-# View to delete a bookmark
 def delete_bookmark(request, bookmark_id):
     if request.method == 'POST':
         bookmark = get_object_or_404(BookmarkedEvent, id=bookmark_id)
