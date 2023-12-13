@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 {% block page_title %}Ticket-Master HomePage{% endblock %}
 {% block content %}
     <div class="container-fluid bg-primary p-2 text-white">
@@ -30,6 +29,4 @@
     {% endfor %}
     </div>
 {% endblock content %}
-{% block extra_js %}
-<script src="{% static 'ticket_notes/js/index.js' %}"></script>
-{% endblock extra_js %}
+
