@@ -23,10 +23,11 @@
             <div class="col-9 bg-danger mt-2 py-2 rounded shadow d-none" id="displayError"></div>
         </div>
     </div>
-    <div class="container-md container-fluid bg-white border rounded shadow" id="card-container">
-    {% for event in events %}
-    {% include "eventCard.html" %}
-    {% endfor %}
+    <div class="container-fluid bg-white border rounded shadow" id="card-container">
+        {% for event in events %}
+        {% include "eventCard.html" %}
+        {% endfor %}
     </div>
+    
 {% endblock content %}
 
