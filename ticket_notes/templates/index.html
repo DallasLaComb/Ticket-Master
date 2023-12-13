@@ -2,7 +2,6 @@
 {% load static %}
 {% block page_title %}Ticket-Master HomePage{% endblock %}
 {% block content %}
-<div class="container">
     <div class="container-fluid bg-primary p-2 text-white">
         <h1 class="text-center">Ticketmaster</h1>
         <h2 class="text-center">Quickly find tickets around you.</h2>
@@ -30,7 +29,6 @@
     {% include "eventCard.html" %}
     {% endfor %}
     </div>
-</div>
 {% endblock content %}
 {% block extra_js %}
 <script src="{% static 'ticket_notes/js/index.js' %}"></script>
