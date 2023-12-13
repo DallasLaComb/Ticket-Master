@@ -23,17 +23,9 @@
                             <input type="hidden" name="image_url" value="{{ event.image_url }}">
                             <!-- The bookmark icon is now a submit button -->
                             <button type="submit" class="btn p-0 border-0 bg-transparent">
-                                <i class="bi bi-bookmark-star h1"></i>
+                                <i class="bi bi-bookmark-star h1 {% if event.is_bookmarked %}text-success{% endif %}"></i>
                             </button>
-                            {% if messages %}
-                            {% for message in messages %}
-                                {% if message.tags == 'success' %}
-                                    <style>
-                                        .bi-bookmark-star { color: green; }
-                                    </style>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+     
                         </form>
                         <!-- End of the form for bookmarking -->
                     </div>

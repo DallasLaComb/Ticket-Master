@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from .models import BookmarkedEvent
 from django.views.decorators.http import require_http_methods
 
@@ -55,6 +55,13 @@ def homepage_view(request):
             except requests.RequestException as e:
                 context['error_message'] = f'Error fetching data: {str(e)}'
 
+            for event in context['events']:
+                    event['is_bookmarked'] = BookmarkedEvent.objects.filter(
+                        event_name=event['event_name'],
+                        city=event['city'],
+                        state=event['state']
+                    ).exists()
+
             context['genre_artist_event'] = genre_artist_event
             context['city'] = city
 
@@ -85,7 +92,7 @@ def bookmark_event(request):
     new_bookmark.save()
     
     # Return a success response
-    return JsonResponse({'status': 'success'})
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def bookmarks_view(request):
     bookmarks = BookmarkedEvent.objects.all()  # Or filter based on user/session
