@@ -32,6 +32,8 @@
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Optional additional JavaScript files -->
-    <script src="{% block extra_js %}{% endblock %}"></script>
+    {% block extra_js %}
+    {% endblock extra_js %}
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block page_title %}Ticket-Master HomePage{% endblock %}
 {% block content %}
 <div class="container">
@@ -25,11 +26,12 @@
         </div>
     </div>
     <div class="container-md container-fluid bg-white border rounded shadow" id="card-container">
-        {% for event in events %}
+    {% for event in events %}
     {% include "eventCard.html" %}
     {% endfor %}
     </div>
 </div>
-
-    
-{% endblock %}
+{% endblock content %}
+{% block extra_js %}
+<script src="{% static 'ticket_notes/js/index.js' %}"></script>
+{% endblock extra_js %}
